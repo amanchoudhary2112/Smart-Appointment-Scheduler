@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+  <div class="max-w-7xl mx-auto p-6">
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
+      <h1 class="text-3xl font-bold text-blue-800 mb-4 md:mb-0">🛠️ Admin Dashboard</h1>
+      <div class="flex flex-wrap gap-3">
+        <a href="/export" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded shadow">📤 Export</a>
+        <a href="/admin_logout" class="text-blue-700 underline hover:text-blue-900">Logout</a>
+      </div>
+    </div>
+
+    <!-- Search Form -->
+    <form method="GET" action="/admin" class="mb-6 flex flex-col sm:flex-row gap-3">
+      <input type="text" name="search" placeholder="Search by name/email"
+             class="p-3 border border-gray-300 rounded w-full sm:w-1/2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+      <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow">🔍 Search</button>
+    </form>
+
+    <!-- Appointments Table -->
+    <div class="overflow-x-auto bg-white shadow rounded-lg">
+      <table class="min-w-full table-auto">
+        <thead>
+          <tr class="bg-blue-100 text-blue-800">
+            <th>class="p-3 text-left">SNO.</th>
+            <th class="p-3 text-left">Name</th>
+            <th class="p-3 text-left">Email</th>
+            <th class="p-3 text-left">Phone</th>
+            <th class="p-3 text-left">Date</th>
+            <th class="p-3 text-left">Time</th>
+            <th class="p-3 text-left">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for a in appointments %}
+          <tr class="border-t hover:bg-gray-50">
+            <td class="p-3">{{ a.name }}</td>
+            <td class="p-3">{{ a.email }}</td>
+            <td class="p-3">{{ a.phone }}</td>
+            <td class="p-3">{{ a.date }}</td>
+            <td class="p-3">{{ a.time }}</td>
+            <td class="p-3 flex gap-3">
+              <a href="/reschedule/{{ a.id }}" class="text-yellow-600 hover:underline">✏️ Reschedule</a>
+              <form method="POST" action="/cancel/{{ a.id }}" onsubmit="return confirm('Are you sure?')">
+                <button class="text-red-600 hover:underline">🗑️ Cancel</button>
+              </form>
+            </td>
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="6" class="p-4 text-center text-gray-500">No appointments found.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</body>
+</html>

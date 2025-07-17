@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Export Appointments</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+</head>
+<body class="bg-gray-100 text-gray-800">
+  <div class="max-w-2xl mx-auto mt-20 p-6 bg-white rounded-xl shadow-md text-center">
+    <h2 class="text-2xl font-bold mb-4">Export Appointment Records</h2>
+    <p class="mb-6">Click the button below to export all appointment data in Excel format.</p>
+
+    <a href="{{ url_for('export') }}" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
+      Download Excel
+    </a>
+    <div class="mt-6">
+      <a href="{{ url_for('dashboard') }}" class="text-sm text-blue-500 hover:underline">← Back to Dashboard</a>
+    </div>
+  </div>
+</body>
+</html>
